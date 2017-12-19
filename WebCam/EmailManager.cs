@@ -5,7 +5,6 @@ namespace WebCam
     class EmailManager
     {
         private readonly SmtpClient _smtpClient;
-        //Fill with your data
         private const string Sender = "";
         private const string Password = "";
 
@@ -24,7 +23,7 @@ namespace WebCam
         public void SendEmail(string receiver, string topic, string filePath)
         {
             var mail = new MailMessage(Sender, receiver, topic, string.Empty);
-            using (var  attachment = new Attachment(filePath))
+            using (var attachment = new Attachment(filePath))
             {
                 mail.Attachments.Add(attachment);
                 _smtpClient.Send(mail);

