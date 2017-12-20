@@ -28,7 +28,7 @@ namespace WebCam
             _config = _tempConfig.UpdateProgram();
             hideMode.Checked = _config.IsHooks;
             emailText.Text = _config.Email;
-            fileSize.Value = _config.FileSize > 5000 ? _config.FileSize : 5000;
+            fileSize.Value = _config.FileSize > 2048 ? _config.FileSize : 2048;
         }
 
         private void SaveSettingsButtonClick(object sender, EventArgs e)
