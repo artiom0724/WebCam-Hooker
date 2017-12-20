@@ -130,6 +130,7 @@
             this.Controls.Add(this.hideMode);
             this.Name = "HookerForm";
             this.Text = "Hooker";
+            this.Load += new System.EventHandler(this.HookerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fileSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

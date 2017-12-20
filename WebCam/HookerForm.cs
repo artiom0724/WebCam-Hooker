@@ -39,10 +39,9 @@ namespace WebCam
         private void SaveSettings()
         {
             _config.Email = emailText.Text;
-            _config.IsHooks = true;
+            _config.IsHooks = hideMode.Checked;
             _config.FileSize = (long)fileSize.Value;
             _config.HideCheck = hideMode.Checked;
-
             _tempConfig.SaveConfig(_config);
         }
 
@@ -62,7 +61,19 @@ namespace WebCam
 
         private void MainWindowShow()
         {
+            Opacity = 1;
+            ShowInTaskbar = true;
+            Activate();
             Show();
+        }
+
+        private void HookerForm_Load(object sender, EventArgs e)
+        {
+            if (hideMode.Checked)
+            {
+                Opacity = 0.0f;
+                ShowInTaskbar = false;
+            }
         }
     }
 }
