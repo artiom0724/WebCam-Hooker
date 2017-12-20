@@ -1,12 +1,13 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Net.Mail;
 
 namespace WebCam
 {
     class EmailManager
     {
         private readonly SmtpClient _smtpClient;
-        private const string Sender = "";
-        private const string Password = "";
+        private const string Sender = "artiom0724@gmail.com";
+        private const string Password = "xtkjdtr1998";
 
         private const string Host = "smtp.gmail.com";
         private const int Port = 587;
@@ -22,12 +23,16 @@ namespace WebCam
 
         public void SendEmail(string receiver, string topic, string filePath)
         {
-            var mail = new MailMessage(Sender, receiver, topic, string.Empty);
-            using (var attachment = new Attachment(filePath))
+            try
             {
-                mail.Attachments.Add(attachment);
-                _smtpClient.Send(mail);
-            }
+                var mail = new MailMessage(Sender, receiver, topic, string.Empty);
+                using (var attachment = new Attachment(filePath))
+                {
+                    mail.Attachments.Add(attachment);
+                    _smtpClient.Send(mail);
+                }
+            }catch (Exception)
+            {}
         }
     }
 }

